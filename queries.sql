@@ -177,3 +177,28 @@ SELECT d.dept_name, AVG(e.salary) AS avg_salary
 FROM employees AS e
 INNER JOIN departments AS d ON e.dept_id = d.dept_id
 GROUP BY d.dept_name;
+
+
+-- =====================================================================
+--  7. SUBQUERIES & DISTINCT  (a query inside a query)
+--
+--  The inner query runs first; its result feeds the outer query.
+-- =====================================================================
+
+-- Employees earning more than the company-wide average salary.
+SELECT emp_name, salary
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+
+-- Employees earning more than the highest salary in department 2.
+SELECT emp_name, salary
+FROM employees
+WHERE salary > (SELECT MAX(salary) FROM employees WHERE dept_id = 2);
+
+-- DISTINCT: the unique department ids that actually have employees.
+SELECT DISTINCT dept_id FROM employees;
+
+-- Departments with NO employees (subquery + NOT IN). Returns 'Marketing'.
+SELECT dept_name
+FROM departments
+WHERE dept_id NOT IN (SELECT DISTINCT dept_id FROM employees);
