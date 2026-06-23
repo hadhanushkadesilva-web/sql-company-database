@@ -42,6 +42,17 @@ location                            emp_name
    both tables, and sample data.
 3. Open [`queries.sql`](queries.sql) and run the queries one at a time to explore.
 
+### Run it from Python
+Two scripts show how a backend (e.g. FastAPI) talks to the database:
+- [`connect_demo.py`](connect_demo.py) — connect, run a JOIN, print the results
+- [`safe_query.py`](safe_query.py) — a **parameterized** query (safe against SQL injection)
+
+```bash
+pip install mysql-connector-python
+py connect_demo.py     # prompts for the MySQL password at runtime
+```
+Passwords are read at runtime with `getpass`, never stored in the files.
+
 ## 📋 What this project demonstrates
 
 - **Schema design** — creating a database and tables, choosing data types, primary keys
@@ -53,6 +64,7 @@ location                            emp_name
 - **Constraints & integrity** — `AUTO_INCREMENT`, `NOT NULL`, `UNIQUE`, `DEFAULT`, `FOREIGN KEY`, `ALTER TABLE`
 - **Joins** — `INNER JOIN`, `LEFT JOIN`, table aliases, and combining joins with `WHERE` / `GROUP BY`
 - **Subqueries** — nested queries, `DISTINCT`, `NOT IN`
+- **Python integration** — connecting from Python and running parameterized (injection-safe) queries
 
 ## 🧭 Example questions answered
 
@@ -68,7 +80,7 @@ location                            emp_name
 - [x] Constraints & `FOREIGN KEY` — enforce that every employee belongs to a real department
 - [x] **JOINs** — show each employee *with their department name*
 - [x] Subqueries
-- [ ] Connect to the database from Python / FastAPI
+- [x] Connect to the database from Python / FastAPI
 
 ---
 *Built as part of my hands-on journey learning SQL for backend development.*
