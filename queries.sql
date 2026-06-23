@@ -144,3 +144,36 @@ ADD FOREIGN KEY (dept_id) REFERENCES departments(dept_id);
 
 -- FOREIGN KEY (parent): can't delete a department that still has employees (Error 1451).
 -- DELETE FROM departments WHERE dept_id = 1;
+
+
+-- =====================================================================
+--  6. JOINS  (combining tables)
+--
+--  Tables are linked by dept_id. JOINs let us show related data from
+--  both tables in one result. (e and d are table aliases.)
+-- =====================================================================
+
+-- INNER JOIN: each employee shown WITH their department name.
+-- Returns only rows that match in BOTH tables.
+SELECT e.emp_name, e.salary, d.dept_name
+FROM employees AS e
+INNER JOIN departments AS d ON e.dept_id = d.dept_id;
+
+-- LEFT JOIN: ALL departments, even those with no employees.
+-- A department with no employees shows emp_name = NULL (e.g. Marketing).
+SELECT d.dept_name, e.emp_name
+FROM departments AS d
+LEFT JOIN employees AS e ON d.dept_id = e.dept_id;
+
+-- JOIN + WHERE + ORDER BY: high earners, with department name, sorted.
+SELECT e.emp_name, e.salary, d.dept_name
+FROM employees AS e
+INNER JOIN departments AS d ON e.dept_id = d.dept_id
+WHERE e.salary > 50000
+ORDER BY e.salary DESC;
+
+-- JOIN + GROUP BY: average salary per department NAME (a readable report).
+SELECT d.dept_name, AVG(e.salary) AS avg_salary
+FROM employees AS e
+INNER JOIN departments AS d ON e.dept_id = d.dept_id
+GROUP BY d.dept_name;

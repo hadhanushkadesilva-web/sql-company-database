@@ -57,7 +57,8 @@ CREATE TABLE projects (
 INSERT INTO departments (dept_id, dept_name, location) VALUES
     (1, 'Engineering', 'Stockholm'),
     (2, 'Sales',       'Gothenburg'),
-    (3, 'HR',          'Malmö');
+    (3, 'HR',          'Malmö'),
+    (4, 'Marketing',   'Uppsala');   -- has no employees (useful for LEFT JOIN demo)
 
 INSERT INTO employees (emp_id, emp_name, salary, dept_id) VALUES
     (1, 'Anna',   52000, 1),

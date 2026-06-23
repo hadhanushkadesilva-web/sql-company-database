@@ -51,6 +51,7 @@ location                            emp_name
 - **Grouping** — `GROUP BY` and filtering groups with `HAVING`
 - **Modifying data** — `UPDATE`, `DELETE` (and why the `WHERE` clause is critical)
 - **Constraints & integrity** — `AUTO_INCREMENT`, `NOT NULL`, `UNIQUE`, `DEFAULT`, `FOREIGN KEY`, `ALTER TABLE`
+- **Joins** — `INNER JOIN`, `LEFT JOIN`, table aliases, and combining joins with `WHERE` / `GROUP BY`
 
 ## 🧭 Example questions answered
 
@@ -64,7 +65,7 @@ location                            emp_name
 
 - [x] `UPDATE` / `DELETE` — modifying data
 - [x] Constraints & `FOREIGN KEY` — enforce that every employee belongs to a real department
-- [ ] **JOINs** — show each employee *with their department name*
+- [x] **JOINs** — show each employee *with their department name*
 - [ ] Subqueries
 - [ ] Connect to the database from Python / FastAPI
 
