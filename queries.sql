@@ -82,3 +82,36 @@ SELECT dept_id, COUNT(*) AS headcount
 FROM employees
 GROUP BY dept_id
 HAVING COUNT(*) > 1;
+
+-- Only departments whose average salary is above 45,000.
+SELECT dept_id, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY dept_id
+HAVING AVG(salary) > 45000;
+
+
+-- =====================================================================
+--  4. CHANGING DATA  (UPDATE, DELETE)
+--
+--  GOLDEN RULE: always include a WHERE clause. Without it, UPDATE/DELETE
+--  affects EVERY row in the table.
+-- =====================================================================
+
+-- Update a single column for one employee.
+UPDATE employees
+SET salary = 45000
+WHERE emp_id = 2;
+
+-- Update several columns at once.
+UPDATE employees
+SET salary = 45000, dept_id = 1
+WHERE emp_id = 2;
+
+-- Delete a specific row (here, a temporary test record).
+DELETE FROM employees
+WHERE emp_id = 99;
+
+-- Note: MySQL Workbench's "safe update mode" blocks UPDATE/DELETE whose
+-- WHERE does not use a key column. To override for the session:
+--   SET SQL_SAFE_UPDATES = 0;   -- turn off
+--   SET SQL_SAFE_UPDATES = 1;   -- turn back on

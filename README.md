@@ -56,7 +56,7 @@ location                            emp_name
 
 ## 📈 Roadmap (as I keep learning)
 
-- [ ] `UPDATE` / `DELETE` — modifying data
+- [x] `UPDATE` / `DELETE` — modifying data
 - [ ] Constraints & `FOREIGN KEY` — enforce that every employee belongs to a real department
 - [ ] **JOINs** — show each employee *with their department name*
 - [ ] Subqueries
