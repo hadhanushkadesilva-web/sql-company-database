@@ -115,3 +115,32 @@ WHERE emp_id = 99;
 -- WHERE does not use a key column. To override for the session:
 --   SET SQL_SAFE_UPDATES = 0;   -- turn off
 --   SET SQL_SAFE_UPDATES = 1;   -- turn back on
+
+
+-- =====================================================================
+--  5. CONSTRAINTS & KEYS  (data integrity)
+--
+--  Constraints are rules MySQL enforces. See schema.sql for the full
+--  table definitions (AUTO_INCREMENT, NOT NULL, UNIQUE, DEFAULT,
+--  FOREIGN KEY). The statements below show how to ADD a constraint to
+--  an existing table and how the database then rejects invalid data.
+-- =====================================================================
+
+-- Add a FOREIGN KEY to an existing table with ALTER TABLE.
+-- (Guarantees every employee's dept_id matches a real department.)
+ALTER TABLE employees
+ADD FOREIGN KEY (dept_id) REFERENCES departments(dept_id);
+
+-- The following statements are SUPPOSED to fail -- they prove the rules work:
+
+-- UNIQUE: duplicate project_name is rejected (Error 1062).
+-- INSERT INTO projects (project_name, dept_id) VALUES ('Website Redesign', 3);
+
+-- NOT NULL: missing project_name is rejected.
+-- INSERT INTO projects (budget, dept_id) VALUES (5000, 1);
+
+-- FOREIGN KEY (child): department 999 doesn't exist -> rejected (Error 1452).
+-- INSERT INTO employees (emp_id, emp_name, salary, dept_id) VALUES (50, 'Ghost', 40000, 999);
+
+-- FOREIGN KEY (parent): can't delete a department that still has employees (Error 1451).
+-- DELETE FROM departments WHERE dept_id = 1;

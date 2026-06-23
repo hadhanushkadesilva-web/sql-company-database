@@ -11,7 +11,8 @@
 CREATE DATABASE IF NOT EXISTS company;
 USE company;
 
--- Start clean if the tables already exist (drop child table first).
+-- Start clean if the tables already exist (drop child tables first).
+DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS departments;
 
@@ -33,7 +34,21 @@ CREATE TABLE employees (
     emp_id    INT PRIMARY KEY,    -- unique id for the employee
     emp_name  VARCHAR(50),        -- employee name
     salary    INT,                -- annual salary
-    dept_id   INT                 -- which department they belong to (-> departments.dept_id)
+    dept_id   INT,                -- which department they belong to
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)  -- must be a real department
+);
+
+-- ---------------------------------------------------------------------
+--  Table: projects
+--  Demonstrates AUTO_INCREMENT, NOT NULL, UNIQUE, DEFAULT, and a
+--  FOREIGN KEY linking each project to a department.
+-- ---------------------------------------------------------------------
+CREATE TABLE projects (
+    project_id    INT AUTO_INCREMENT PRIMARY KEY,  -- MySQL generates the id
+    project_name  VARCHAR(100) NOT NULL UNIQUE,    -- required, no duplicates
+    budget        INT DEFAULT 0,                   -- defaults to 0 if omitted
+    dept_id       INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
 );
 
 -- ---------------------------------------------------------------------
@@ -51,3 +66,8 @@ INSERT INTO employees (emp_id, emp_name, salary, dept_id) VALUES
     (4, 'Johan',  39000, 3),
     (5, 'Maria',  75000, 1),
     (6, 'Lars',   48000, 2);
+
+-- project_id and budget are left out on purpose to show AUTO_INCREMENT + DEFAULT.
+INSERT INTO projects (project_name, dept_id) VALUES
+    ('Website Redesign', 1),
+    ('Sales Dashboard',  2);

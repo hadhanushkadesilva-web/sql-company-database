@@ -29,7 +29,11 @@ location                            emp_name
 | **employees** | `emp_id` | INT | Primary key |
 | | `emp_name` | VARCHAR(50) | |
 | | `salary` | INT | |
-| | `dept_id` | INT | References a department |
+| | `dept_id` | INT | **Foreign key** → departments |
+| **projects** | `project_id` | INT | Primary key, `AUTO_INCREMENT` |
+| | `project_name` | VARCHAR(100) | `NOT NULL`, `UNIQUE` |
+| | `budget` | INT | `DEFAULT 0` |
+| | `dept_id` | INT | **Foreign key** → departments |
 
 ## 🚀 How to run
 
@@ -45,6 +49,8 @@ location                            emp_name
 - **Reading & filtering** — `SELECT`, `WHERE`, `AND`/`OR`, `BETWEEN`, `IN`, `LIKE`, `ORDER BY`, `LIMIT`
 - **Aggregation** — `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`
 - **Grouping** — `GROUP BY` and filtering groups with `HAVING`
+- **Modifying data** — `UPDATE`, `DELETE` (and why the `WHERE` clause is critical)
+- **Constraints & integrity** — `AUTO_INCREMENT`, `NOT NULL`, `UNIQUE`, `DEFAULT`, `FOREIGN KEY`, `ALTER TABLE`
 
 ## 🧭 Example questions answered
 
@@ -57,7 +63,7 @@ location                            emp_name
 ## 📈 Roadmap (as I keep learning)
 
 - [x] `UPDATE` / `DELETE` — modifying data
-- [ ] Constraints & `FOREIGN KEY` — enforce that every employee belongs to a real department
+- [x] Constraints & `FOREIGN KEY` — enforce that every employee belongs to a real department
 - [ ] **JOINs** — show each employee *with their department name*
 - [ ] Subqueries
 - [ ] Connect to the database from Python / FastAPI
